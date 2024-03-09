@@ -1,0 +1,17 @@
+.app {
+  height: 100dvh;
+  width: 100vw;
+
+  display: grid;
+  grid-template-columns: 80px 1fr 2fr;
+  grid-template-rows: 60px 1fr;
+  grid-template-areas:
+    "header header header"
+    "nav hub chatwindow";
+  gap: 2px;
+}
+
+.header {
+  grid-area: header;
+  padding: 10px;
+}
