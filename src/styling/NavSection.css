@@ -1,4 +1,68 @@
 nav {
   grid-area: nav;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+}
+
+nav ul {
+  list-style: none;
+  margin: 20px 0 0 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+nav ul li, .nav-config i {
   padding: 10px;
+  border-radius: 10px;
+  cursor: pointer;
+  position: relative;
+  transition: background-color 0.2s ease-out;
+}
+
+nav ul li.active::before,
+.nav-config i.active::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 25%;
+  height: 50%;
+  width: 5px;
+  background-color: #4682b4;
+  border-radius: 10px;
+}
+
+nav ul li.active,
+.nav-config i.active {
+  background-color: #363636;
+}
+
+nav ul li:hover,
+.nav-config i:hover {
+  background-color: rgba(54, 54, 54, 0.6);
+}
+
+nav ion-icon {
+  font-size: 2rem;
+}
+
+.nav-config {
+  margin-top: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  padding: 10px;
+}
+
+.nav-config .profile {
+  width: 3rem;
+  height: 3rem;
+  border-radius: 50px;
+  border: 1px solid #fff;
+  cursor: pointer;
 }

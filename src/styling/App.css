@@ -14,4 +14,11 @@
 .header {
   grid-area: header;
   padding: 10px;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+.header ion-icon {
+  color: #4682b4;
+  font-size: 2rem;
 }
