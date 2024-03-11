@@ -1,8 +1,9 @@
+import { IconContext } from './App';
 import './styling/NavSection.css'
-import { useState } from 'react';
+import { useContext } from 'react';
 
 const NavSection = () => {
-  const [activeIcon, setActiveIcon] = useState('chats');
+  const { activeIcon, setActiveIcon } = useContext(IconContext);
   
   const handleIconClick = (icon) => {
     setActiveIcon(icon);
