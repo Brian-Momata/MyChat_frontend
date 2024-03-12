@@ -6,7 +6,7 @@
   padding: 20px;
 }
 
-.hub-chat {
+.hub-chat, .hub-person {
   display: flex;
   align-items: center;
   margin-top: 15px;
@@ -16,11 +16,11 @@
   transition: background-color 0.3s ease-in;
 }
 
-.hub-chat:hover {
+.hub-chat:hover, .hub-person:hover {
   background-color: #242424;
 }
 
-.chat-avatar {
+.hub-avatar {
   width: 60px;
   height: 60px;
   border-radius: 50%;
@@ -28,7 +28,7 @@
   border: 1px solid #fff;
 }
 
-.chat-details {
+.chat-details, .person-details {
   flex: 1;
 }
 
@@ -39,7 +39,7 @@
   margin-bottom: 5px;
 }
 
-.chat-name {
+.chat-name, .person-name {
   font-weight: bold;
 }
 
