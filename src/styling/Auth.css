@@ -1,0 +1,96 @@
+.auth-wrapper {
+  height: 100dvh;
+  width: 100vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.app-logo {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  margin-right: 20px;
+}
+
+.app-logo ion-icon {
+  font-size: 10rem;
+  color: #777;
+}
+
+.app-logo q {
+  font-style: italic;
+  color: #777;
+}
+
+.auth-container {
+  max-width: 400px;
+  height: max-content;
+  padding: 20px;
+  margin-left: 50px;
+  background-color: #363636;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.auth-container h2 {
+  font-size: 1.5rem;
+  margin-bottom: 20px;
+  color: #fff;
+}
+
+.auth-container form {
+  display: flex;
+  flex-direction: column;
+}
+
+.auth-container label {
+  display: block;
+  margin-bottom: 5px;
+  color: #fff;
+}
+
+.auth-container input {
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #fff;
+  color: #363636;
+}
+
+.auth-container .error-message {
+  color: #ff0000;
+  margin-top: -10px;
+  margin-bottom: 15px;
+}
+
+.auth-container button {
+  background-color: #4682b4;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  cursor: pointer;
+  transition: background-color 0.3s ease-in;
+}
+
+.auth-container button:hover {
+  background-color: #2e638e;
+}
+
+.auth-container p {
+  margin-top: 15px;
+  color: #fff;
+}
+
+.auth-container a {
+  color: #4682b4;
+  text-decoration: none;
+  margin-left: 5px;
+}
+
+.auth-container a:hover {
+  text-decoration: underline;
+}
