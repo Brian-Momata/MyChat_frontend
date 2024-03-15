@@ -26,6 +26,7 @@
 
 .auth-container {
   max-width: 400px;
+  width: 100%;
   height: max-content;
   padding: 20px;
   margin-left: 50px;
