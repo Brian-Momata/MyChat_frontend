@@ -11,14 +11,19 @@ export const IconContext = createContext({
   clickedUser: {},
   handlePersonClick: () => { },
   onAuthenticationSuccess: () => { },
+  showProfile: Boolean,
+  setShowProfile: () => {}
 })
 function App() {
   const [activeIcon, setActiveIcon] = useState('chats');
   const [clickedUser, setClickedUser] = useState('');
   const [authenticated, setAuthenticated] = useState(false);
+  const [showProfile, setShowProfile] = useState(false);
 
-  const handlePersonClick = (person) => setClickedUser(person);
-
+  const handlePersonClick = (person) => {
+    setClickedUser(person);
+    setShowProfile(false);
+  }
   const onAuthenticationSuccess = () => {
     console.log("Authentication successful!");
     setAuthenticated(true);
@@ -37,7 +42,9 @@ function App() {
             setActiveIcon,
             clickedUser,
             handlePersonClick,
-            onAuthenticationSuccess
+            onAuthenticationSuccess,
+            showProfile,
+            setShowProfile
           }}>
             <NavSection />
             <MessagingHub />
