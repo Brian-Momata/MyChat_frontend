@@ -3,7 +3,7 @@ import './styling/NavSection.css';
 import { useContext } from 'react';
 
 const NavSection = () => {
-  const { activeIcon, setActiveIcon, showProfile, setShowProfile } = useContext(IconContext);
+  const { activeIcon, setActiveIcon, showProfile, setShowProfile, currentUser } = useContext(IconContext);
 
   const handleIconClick = (icon) => {
     if (icon === 'profile') {
@@ -36,8 +36,8 @@ const NavSection = () => {
               </div>
             </div>
             <div className='profile-details'>
-              <p>Name: John Doe</p>
-              <p>Email: johndoe@example.com</p>
+              <p>{currentUser.username}</p>
+              <p>email: {currentUser.email}</p>
             </div>
           </div>
         )}

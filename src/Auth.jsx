@@ -2,7 +2,7 @@ import { useState, useContext } from 'react';
 import { IconContext } from './App';
 import './styling/Auth.css'
 const Auth = () => {
-  const { onAuthenticationSuccess } = useContext(IconContext);
+  const { onAuthenticationSuccess, setCurrentUser } = useContext(IconContext);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [username, setUsername] = useState('');
@@ -33,6 +33,7 @@ const Auth = () => {
       if (response.ok) {
         onAuthenticationSuccess();
         const responseData = await response.json();
+        setCurrentUser(responseData.data.user)
       } else {
         alert(type === 'signup' ? 'Failed to sign up' : 'Failed to log in');
       }
