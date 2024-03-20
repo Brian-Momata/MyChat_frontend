@@ -1,16 +1,26 @@
 import './styling/MessagingHub.css';
-import { useContext } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { IconContext } from './App';
 
 const MessagingHub = () => {
   const { activeIcon, handlePersonClick } = useContext(IconContext);
+  const [users, setUsers] = useState([]);
 
-  // I'm using this for the functionality. Will delete later
-  const people = [
-    { name: 'John', lastseen: 'Yesterday, 12:13 PM' },
-    { name: 'Brian', lastseen: 'Yesterday, 09:13 PM' },
-    { name: 'Momata', lastseen: 'Today, 12:13 AM' }
-  ];
+  const usersApiEndpoint = 'http://127.0.0.1:3001/users'
+
+  useEffect(() => {
+    const fetchUsers = async () => {
+      try {
+        const response = await fetch(usersApiEndpoint);
+        const data = await response.json();
+        setUsers(data);
+      } catch (error) {
+        console.error('Error fetching users:', error);
+      }
+    };
+
+    fetchUsers();
+  }, []); // Empty dependency array means this effect runs once after the component mounts
 
   return (
     <div className="messaging-hub">
@@ -23,7 +33,7 @@ const MessagingHub = () => {
             <img className='hub-avatar' src="" alt="profile" />
             <div className='chat-details'>
               <div className='chat-info'>
-                <p className='chat-name'>{people[0].name}</p>
+                <p className='chat-name'>{users[0]?.username}</p>
                 <span className='chat-time'>Time</span>
               </div>
               <p className='last-message'>Last message</p>
@@ -34,24 +44,14 @@ const MessagingHub = () => {
       {activeIcon === 'people' && (
         <div className='hub-header'>
           <h3>People</h3>
-          <div className='hub-person' onClick={() => handlePersonClick(people[0])}>
-            <img className='hub-avatar' src="" alt="profile" />
-            <div className='person-details'>
-              <p className='person-name'>{people[0].name}</p>
+          {users.map((person, index) => (
+            <div key={index} className='hub-person' onClick={() => handlePersonClick(person)}>
+              <img className='hub-avatar' src='' alt="profile" />
+              <div className='person-details'>
+                <p className='person-name'>{person.username}</p>
+              </div>
             </div>
-          </div>
-          <div className='hub-person' onClick={() => handlePersonClick(people[1])}>
-            <img className='hub-avatar' src="" alt="profile" />
-            <div className='person-details'>
-              <p className='person-name'>{people[1].name}</p>
-            </div>
-          </div>
-          <div className='hub-person' onClick={() => handlePersonClick(people[2])}>
-            <img className='hub-avatar' src="" alt="profile" />
-            <div className='person-details'>
-              <p className='person-name'>{people[2].name}</p>
-            </div>
-          </div>
+          ))}
         </div>
       )}
     </div>
