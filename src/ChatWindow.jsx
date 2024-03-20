@@ -11,7 +11,7 @@ const ChatWindow = () => {
 					<div className="chat-window-profile">
 						<img className='chat-window-avatar' src="" alt="profile" />
 						<div className='user-info'>
-							<h4>{clickedUser.name}</h4>
+							<h4>{clickedUser.username}</h4>
 							<div className='status-container'>
 								<span className='online-status'>Online</span>
 								<span className='last-seen'>Last seen: {clickedUser.lastseen}</span>
