@@ -1,10 +1,30 @@
 import './styling/ChatWindow.css'
 import { IconContext } from './App';
-import { useContext, useState } from 'react';
+import { useContext, useState, useEffect } from 'react';
 
 const ChatWindow = () => {
 	const { clickedUser, currentUser } = useContext(IconContext)
 	const [messageContent, setMessageContent] = useState('')
+	const [messages, setMessages] = useState([]);
+
+	const fetchMessages = async () => {
+		try {
+			const response = await fetch(`http://127.0.0.1:3001/messages/fetch?clicked_user_id=${clickedUser.id}&current_user_id=${currentUser.id}`);
+			if (!response.ok) {
+				throw new Error('Failed to fetch messages');
+			}
+			const data = await response.json();
+			setMessages(data);
+		} catch (error) {
+			console.error('Error fetching messages:', error);
+		}
+	};
+
+	useEffect(() => {
+		if (clickedUser) {
+			fetchMessages();
+		}
+	}, [clickedUser]);
 
 	const messagesUrl = 'http://127.0.0.1:3001/user/send_message'
 
@@ -48,6 +68,12 @@ const ChatWindow = () => {
 						</div>
 					</div>
 					<div className="messages-container">
+						{messages.map((message) => (
+							<div key={message.id} className={`message ${message.sender_id === currentUser.id ? 'sent' : 'received'}`}>
+								<p>{message.content}</p>
+							</div>
+						))}
+
 					</div>
 					<div className="write-messages">
 						<input type="text" placeholder="Type your message..." onChange={(e) => setMessageContent(e.target.value)} />
