@@ -67,11 +67,12 @@ nav ion-icon {
   border: 1px solid #fff;
   cursor: pointer;
 }
+
 .profile-modal {
   position: absolute;
   bottom: 10px;
   left: 80px;
-  background-color: rgba(85, 85, 85, 0.5);
+  background-color: rgba(85, 85, 85, 0.9);
   color: #fff;
   border-radius: 10px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
@@ -91,4 +92,60 @@ nav ion-icon {
   height: 100px;
   border-radius: 50%;
   border: 1px solid #fff;
+}
+
+.profile-details span {
+  color: #4682b4;
+  font-weight: bold;
+}
+
+.avatars {
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.avatars button {
+  padding: 8px 16px;
+  background-color: #4682b4;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  font-size: 16px;
+  outline: none;
+}
+
+.avatars button:hover {
+  background-color: #36648b;
+}
+
+.avatar-options ul {
+  list-style: none;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+}
+
+.avatar-options ul li {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  overflow: hidden;
+  cursor: pointer;
+  transition: transform 0.2s ease-out;
+}
+
+.avatar-options ul li:hover {
+  transform: scale(1.1);
+}
+
+.avatar-options ul li img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
 }
