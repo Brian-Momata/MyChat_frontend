@@ -1,9 +1,19 @@
 import { IconContext } from './App';
 import './styling/NavSection.css';
-import { useContext } from 'react';
+import { useContext, useState } from 'react';
 
 const NavSection = () => {
   const { activeIcon, setActiveIcon, showProfile, setShowProfile, currentUser } = useContext(IconContext);
+  const [showAvatarOptions, setShowAvatarOptions] = useState(false);
+
+  const avatars = [
+    { id: 1, src: "https://api.dicebear.com/8.x/avataaars/svg?seed=Milo" },
+    { id: 2, src: "https://api.dicebear.com/8.x/avataaars/svg?seed=Max" },
+    { id: 3, src: "https://api.dicebear.com/8.x/avataaars/svg?seed=Midnight" },
+    { id: 4, src: "https://api.dicebear.com/8.x/lorelei/svg?seed=Midnight" },
+    { id: 5, src: "https://api.dicebear.com/8.x/lorelei/svg?seed=Max" },
+    { id: 6, src: "https://api.dicebear.com/8.x/open-peeps/svg?seed=Willow" },
+  ];
 
   const handleIconClick = (icon) => {
     if (icon === 'profile') {
@@ -12,6 +22,11 @@ const NavSection = () => {
       setActiveIcon(icon);
       setShowProfile(false);
     }
+  };
+
+  const handleAvatarSelection = (avatarSrc) => {
+    setShowAvatarOptions(false);
+    // TODO: Add functionality to associate user with avatar
   };
 
   return (
@@ -36,8 +51,22 @@ const NavSection = () => {
               </div>
             </div>
             <div className='profile-details'>
-              <p>{currentUser.username}</p>
-              <p>email: {currentUser.email}</p>
+              <p><span>Username:</span> {currentUser.username}</p>
+              <p><span>Email:</span> {currentUser.email}</p>
+            </div>
+            <div className='avatars'>
+              <button onClick={() => setShowAvatarOptions(true)}>Select an avatar</button>
+              {showAvatarOptions && (
+                <div className='avatar-options'>
+                  <ul>
+                    {avatars.map((avatar) => (
+                      <li key={avatar.id} onClick={() => handleAvatarSelection(avatar.src)}>
+                        <img src={avatar.src} alt={`Avatar ${avatar.id}`} />
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              )}
             </div>
           </div>
         )}
