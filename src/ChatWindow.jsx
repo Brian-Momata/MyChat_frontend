@@ -48,6 +48,9 @@ const ChatWindow = () => {
 
 			// Clear the message input after sending
 			setMessageContent('');
+			// Add the sent message to the messages array immediately to trigger a rerender
+			const sentMessage = await response.json();
+			setMessages((prevMessages) => [...prevMessages, sentMessage]);
 		} catch (error) {
 			console.error('Error sending message:', error);
 		}
