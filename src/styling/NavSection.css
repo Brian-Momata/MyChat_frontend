@@ -64,8 +64,8 @@ nav ion-icon {
   width: 3rem;
   height: 3rem;
   border-radius: 50px;
-  border: 1px solid #fff;
   cursor: pointer;
+  overflow: hidden;
 }
 
 .profile-modal {
@@ -91,7 +91,7 @@ nav ion-icon {
   width: 100px;
   height: 100px;
   border-radius: 50%;
-  border: 1px solid #fff;
+  overflow: hidden;
 }
 
 .profile-details span {
