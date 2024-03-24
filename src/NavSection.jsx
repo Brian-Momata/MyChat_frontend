@@ -24,9 +24,22 @@ const NavSection = () => {
     }
   };
 
-  const handleAvatarSelection = (avatarSrc) => {
+  const handleAvatarSelection = async (avatarSrc) => {
     setShowAvatarOptions(false);
-    // TODO: Add functionality to associate user with avatar
+    const userAvatarUrl = 'http://127.0.0.1:3001/user/avatar'
+
+    try {
+      const response = await fetch(userAvatarUrl, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          user_id: currentUser.id,
+          avatar: avatarSrc,
+        })
+      })
+    } catch (error) {
+      console.error('Failed to update avatar', error)
+    }
   };
 
   return (
@@ -47,7 +60,7 @@ const NavSection = () => {
           <div className='profile-modal'>
             <div className='profile-img-container'>
               <div className='profile'>
-                <img src="" alt="profile" />
+                <img src={currentUser.avatar} alt="profile" />
               </div>
             </div>
             <div className='profile-details'>
@@ -72,7 +85,7 @@ const NavSection = () => {
         )}
 
         <div className='nav-profile' onClick={() => handleIconClick('profile')}>
-          <img src="" alt="Profile" />
+          <img src={currentUser?.avatar} alt="Profile" />
         </div>
       </div>
     </nav>
