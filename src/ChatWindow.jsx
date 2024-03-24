@@ -61,7 +61,7 @@ const ChatWindow = () => {
 			{clickedUser && (
 				<>
 					<div className="chat-window-profile">
-						<img className='chat-window-avatar' src="" alt="profile" />
+						<img className='chat-window-avatar' src={clickedUser.avatar} alt="profile" />
 						<div className='user-info'>
 							<h4>{clickedUser.username}</h4>
 							<div className='status-container'>
