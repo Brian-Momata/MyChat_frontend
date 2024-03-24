@@ -3,7 +3,7 @@ import { useContext, useEffect, useState } from 'react';
 import { IconContext } from './App';
 
 const MessagingHub = () => {
-  const { activeIcon, handlePersonClick } = useContext(IconContext);
+  const { activeIcon, handlePersonClick, currentUser, setCurrentUser } = useContext(IconContext);
   const [users, setUsers] = useState([]);
 
   const usersApiEndpoint = 'http://127.0.0.1:3001/users'
@@ -21,6 +21,13 @@ const MessagingHub = () => {
 
     fetchUsers();
   }, []); // Empty dependency array means this effect runs once after the component mounts
+
+  useEffect(() => {
+    if (users.length > 0 && currentUser) {
+      const newCurrentUser = users.find(user => user.id === currentUser.id);
+      setCurrentUser(newCurrentUser);
+    }
+  }, [users]);
 
   return (
     <div className="messaging-hub">
@@ -46,7 +53,7 @@ const MessagingHub = () => {
           <h3>People</h3>
           {users.map((person, index) => (
             <div key={index} className='hub-person' onClick={() => handlePersonClick(person)}>
-              <img className='hub-avatar' src='' alt="profile" />
+              <img className='hub-avatar' src={person.avatar} alt="profile" />
               <div className='person-details'>
                 <p className='person-name'>{person.username}</p>
               </div>
