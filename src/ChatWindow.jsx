@@ -1,11 +1,12 @@
 import './styling/ChatWindow.css'
 import { IconContext } from './App';
-import { useContext, useState, useEffect } from 'react';
+import { useContext, useState, useEffect, useRef } from 'react';
 
 const ChatWindow = () => {
 	const { clickedUser, currentUser } = useContext(IconContext)
 	const [messageContent, setMessageContent] = useState('')
 	const [messages, setMessages] = useState([]);
+	const messageInputRef = useRef(null);
 
 	const fetchMessages = async () => {
 		try {
@@ -48,6 +49,7 @@ const ChatWindow = () => {
 
 			// Clear the message input after sending
 			setMessageContent('');
+			messageInputRef.current.value = '';
 			// Add the sent message to the messages array immediately to trigger a rerender
 			const sentMessage = await response.json();
 			setMessages((prevMessages) => [...prevMessages, sentMessage]);
@@ -79,7 +81,12 @@ const ChatWindow = () => {
 
 					</div>
 					<div className="write-messages">
-						<input type="text" placeholder="Type your message..." onChange={(e) => setMessageContent(e.target.value)} />
+						<input
+							type="text"
+							placeholder="Type your message..."
+							onChange={(e) => setMessageContent(e.target.value)}
+							ref={messageInputRef}
+						/>
 						<button onClick={sendMessage}><ion-icon name="send-outline"></ion-icon></button>
 					</div>
 				</>
