@@ -3,49 +3,7 @@ import { useContext, useEffect, useState } from 'react';
 import { IconContext } from './App';
 
 const MessagingHub = () => {
-  const { activeIcon, handlePersonClick, currentUser, setCurrentUser } = useContext(IconContext);
-  const [users, setUsers] = useState([]);
-  const [sentMessages, setSentMessages] = useState([]);
-
-  const usersApiEndpoint = 'http://127.0.0.1:3001/users';
-
-  useEffect(() => {
-    const fetchUsers = async () => {
-      try {
-        const response = await fetch(usersApiEndpoint);
-        const data = await response.json();
-        setUsers(data);
-      } catch (error) {
-        console.error('Error fetching users:', error);
-      }
-    };
-
-    fetchUsers();
-  }, []); // Empty dependency array means this effect runs once after the component mounts
-
-  useEffect(() => {
-    const fetchSentMessages = async () => {
-      if (currentUser) {
-        const sentMessagesApiEndpoint = `http://127.0.0.1:3001/user/sent_messages?user_id=${currentUser.id}`;
-        try {
-          const response = await fetch(sentMessagesApiEndpoint);
-          const data = await response.json();
-          setSentMessages(data);
-        } catch (error) {
-          console.error('Error fetching sent messages:', error);
-        }
-      }
-    };
-
-    fetchSentMessages();
-  }, [currentUser]);
-
-  useEffect(() => {
-    if (users.length > 0 && currentUser) {
-      const newCurrentUser = users.find(user => user.id === currentUser.id);
-      setCurrentUser(newCurrentUser);
-    }
-  }, []);
+  const { activeIcon, handlePersonClick, users, sentMessages } = useContext(IconContext);
 
   return (
     <div className="messaging-hub">
