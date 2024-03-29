@@ -60,12 +60,12 @@ const NavSection = () => {
           <div className='profile-modal'>
             <div className='profile-img-container'>
               <div className='profile'>
-                <img src={currentUser.avatar} alt="profile" />
+                <img src={currentUser?.avatar} alt="profile" />
               </div>
             </div>
             <div className='profile-details'>
-              <p><span>Username:</span> {currentUser.username}</p>
-              <p><span>Email:</span> {currentUser.email}</p>
+              <p><span>Username:</span> {currentUser?.username}</p>
+              <p><span>Email:</span> {currentUser?.email}</p>
             </div>
             <div className='avatars'>
               <button onClick={() => setShowAvatarOptions(true)}>Select an avatar</button>
