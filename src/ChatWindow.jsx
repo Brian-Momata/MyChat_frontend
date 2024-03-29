@@ -3,7 +3,7 @@ import { IconContext } from './App';
 import { useContext, useState, useEffect, useRef } from 'react';
 
 const ChatWindow = () => {
-	const { clickedUser, currentUser } = useContext(IconContext)
+	const { clickedUser, currentUser, defaultProfile } = useContext(IconContext)
 	const [messageContent, setMessageContent] = useState('')
 	const [messages, setMessages] = useState([]);
 	const messageInputRef = useRef(null);
@@ -63,7 +63,7 @@ const ChatWindow = () => {
 			{clickedUser && (
 				<>
 					<div className="chat-window-profile">
-						<img className='chat-window-avatar' src={clickedUser.avatar} alt="profile" />
+						<img className='chat-window-avatar' src={clickedUser.avatar || defaultProfile} alt="profile" />
 						<div className='user-info'>
 							<h4>{clickedUser.username}</h4>
 							<div className='status-container'>

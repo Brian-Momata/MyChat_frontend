@@ -3,7 +3,7 @@ import { useContext, useEffect, useState } from 'react';
 import { IconContext } from './App';
 
 const MessagingHub = () => {
-  const { activeIcon, handlePersonClick, users, sentMessages } = useContext(IconContext);
+  const { activeIcon, handlePersonClick, users, sentMessages, defaultProfile } = useContext(IconContext);
 
   return (
     <div className="messaging-hub">
@@ -16,7 +16,7 @@ const MessagingHub = () => {
             const receiverUser = users.find(user => user.id === message.receiver_id);
             return (
               <div key={index} className='hub-chat' onClick={() => handlePersonClick(receiverUser)}>
-                <img className='hub-avatar' src={receiverUser?.avatar} alt="profile" />
+                <img className='hub-avatar' src={receiverUser.avatar || defaultProfile} alt="profile" />
                 <div className='chat-details'>
                   <div className='chat-info'>
                     <p className='chat-name'>{receiverUser?.username}</p>
@@ -34,7 +34,7 @@ const MessagingHub = () => {
           <h3>People</h3>
           {users.map((person, index) => (
             <div key={index} className='hub-person' onClick={() => handlePersonClick(person)}>
-              <img className='hub-avatar' src={person.avatar} alt="profile" />
+              <img className='hub-avatar' src={person.avatar || defaultProfile} alt="profile" />
               <div className='person-details'>
                 <p className='person-name'>{person.username}</p>
               </div>

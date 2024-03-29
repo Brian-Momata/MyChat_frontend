@@ -17,6 +17,7 @@ export const IconContext = createContext({
   setCurrentUser: () => { },
   users: [],
   sentMessages: [],
+  defaultProfile: '',
 })
 function App() {
   const [activeIcon, setActiveIcon] = useState('chats');
@@ -27,6 +28,7 @@ function App() {
   const [users, setUsers] = useState([]);
   const [sentMessages, setSentMessages] = useState([]);
 
+  const defaultProfile = 'https://api.dicebear.com/8.x/icons/svg?seed=Sassy&backgroundColor[]'
   const usersApiEndpoint = 'http://127.0.0.1:3001/users';
 
   useEffect(() => {
@@ -89,6 +91,7 @@ function App() {
             currentUser,
             users,
             sentMessages,
+            defaultProfile,
           }}>
             <NavSection />
             <MessagingHub />

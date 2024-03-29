@@ -3,7 +3,7 @@ import './styling/NavSection.css';
 import { useContext, useState } from 'react';
 
 const NavSection = () => {
-  const { activeIcon, setActiveIcon, showProfile, setShowProfile, currentUser } = useContext(IconContext);
+  const { activeIcon, setActiveIcon, showProfile, setShowProfile, currentUser, defaultProfile } = useContext(IconContext);
   const [showAvatarOptions, setShowAvatarOptions] = useState(false);
 
   const avatars = [
@@ -60,12 +60,12 @@ const NavSection = () => {
           <div className='profile-modal'>
             <div className='profile-img-container'>
               <div className='profile'>
-                <img src={currentUser?.avatar} alt="profile" />
+                <img src={currentUser?.avatar || defaultProfile} alt="profile" />
               </div>
             </div>
             <div className='profile-details'>
-              <p><span>Username:</span> {currentUser?.username}</p>
-              <p><span>Email:</span> {currentUser?.email}</p>
+              <p><span>Username:</span> {currentUser.username}</p>
+              <p><span>Email:</span> {currentUser.email}</p>
             </div>
             <div className='avatars'>
               <button onClick={() => setShowAvatarOptions(true)}>Select an avatar</button>
@@ -85,7 +85,7 @@ const NavSection = () => {
         )}
 
         <div className='nav-profile' onClick={() => handleIconClick('profile')}>
-          <img src={currentUser?.avatar} alt="Profile" />
+          <img src={currentUser?.avatar || defaultProfile} alt="Profile" />
         </div>
       </div>
     </nav>
