@@ -1,6 +1,7 @@
 import { useState, useContext } from 'react';
 import { IconContext } from './App';
 import './styling/Auth.css'
+
 const Auth = () => {
   const { onAuthenticationSuccess, setCurrentUser } = useContext(IconContext);
   const [email, setEmail] = useState('');
@@ -8,6 +9,8 @@ const Auth = () => {
   const [username, setUsername] = useState('');
   const [passwordError, setPasswordError] = useState(false);
   const [type, setType] = useState('signup');
+
+  // New api endpoint https://mychat-backend-zhp5.onrender.com/
 
   const apiUrl = `http://127.0.0.1:3001/users/${type === 'signup' ? 'signup' : 'login'}`;
 
@@ -33,7 +36,8 @@ const Auth = () => {
       if (response.ok) {
         onAuthenticationSuccess();
         const responseData = await response.json();
-        setCurrentUser(responseData.data.user)
+        const currentUser = responseData.data.user;
+        setCurrentUser(currentUser);
       } else {
         alert(type === 'signup' ? 'Failed to sign up' : 'Failed to log in');
       }
