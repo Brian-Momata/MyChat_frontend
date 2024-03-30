@@ -29,7 +29,7 @@ function App() {
   const [sentMessages, setSentMessages] = useState([]);
 
   const defaultProfile = 'https://api.dicebear.com/8.x/icons/svg?seed=Sassy&backgroundColor[]'
-  const usersApiEndpoint = 'http://127.0.0.1:3001/users';
+  const usersApiEndpoint = 'https://mychat-backend-zhp5.onrender.com/users';
 
   useEffect(() => {
     const fetchUsers = async () => {
@@ -48,7 +48,7 @@ function App() {
   useEffect(() => {
     const fetchSentMessages = async () => {
       if (currentUser) {
-        const sentMessagesApiEndpoint = `http://127.0.0.1:3001/user/sent_messages?user_id=${currentUser.id}`;
+        const sentMessagesApiEndpoint = `https://mychat-backend-zhp5.onrender.com/user/sent_messages?user_id=${currentUser.id}`;
         try {
           const response = await fetch(sentMessagesApiEndpoint);
           const data = await response.json();

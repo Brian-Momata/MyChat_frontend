@@ -26,7 +26,7 @@ const NavSection = () => {
 
   const handleAvatarSelection = async (avatarSrc) => {
     setShowAvatarOptions(false);
-    const userAvatarUrl = 'http://127.0.0.1:3001/user/avatar'
+    const userAvatarUrl = 'https://mychat-backend-zhp5.onrender.com/user/avatar'
 
     try {
       const response = await fetch(userAvatarUrl, {

@@ -10,9 +10,7 @@ const Auth = () => {
   const [passwordError, setPasswordError] = useState(false);
   const [type, setType] = useState('signup');
 
-  // New api endpoint https://mychat-backend-zhp5.onrender.com/
-
-  const apiUrl = `http://127.0.0.1:3001/users/${type === 'signup' ? 'signup' : 'login'}`;
+  const apiUrl = `https://mychat-backend-zhp5.onrender.com/users/${type === 'signup' ? 'signup' : 'login'}`;
 
   const handleSubmit = async (e) => {
     e.preventDefault();
