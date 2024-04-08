@@ -10,7 +10,7 @@ const ChatWindow = () => {
 
 	const fetchMessages = async () => {
 		try {
-			const response = await fetch(`https://mychat-backend-zhp5.onrender.com/messages/fetch?clicked_user_id=${clickedUser.id}&current_user_id=${currentUser.id}`);
+			const response = await fetch(`https://backend-api-dmnv.onrender.com/messages/fetch?clicked_user_id=${clickedUser.id}&current_user_id=${currentUser.id}`);
 			if (!response.ok) {
 				throw new Error('Failed to fetch messages');
 			}
@@ -27,7 +27,7 @@ const ChatWindow = () => {
 		}
 	}, [clickedUser]);
 
-	const messagesUrl = 'https://mychat-backend-zhp5.onrender.com/user/send_message'
+	const messagesUrl = 'https://backend-api-dmnv.onrender.com/user/send_message'
 
 	const sendMessage = async () => {
 		try {

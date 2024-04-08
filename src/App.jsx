@@ -29,7 +29,7 @@ function App() {
   const [sentMessages, setSentMessages] = useState([]);
 
   const defaultProfile = 'https://api.dicebear.com/8.x/icons/svg?seed=Sassy&backgroundColor[]'
-  const usersApiEndpoint = 'https://mychat-backend-zhp5.onrender.com/users';
+  const usersApiEndpoint = 'https://backend-api-dmnv.onrender.com/users';
 
   useEffect(() => {
     const fetchUsers = async () => {
@@ -48,7 +48,7 @@ function App() {
   useEffect(() => {
     const fetchSentMessages = async () => {
       if (currentUser) {
-        const sentMessagesApiEndpoint = `https://mychat-backend-zhp5.onrender.com/user/sent_messages?user_id=${currentUser.id}`;
+        const sentMessagesApiEndpoint = `https://backend-api-dmnv.onrender.com/user/sent_messages?user_id=${currentUser.id}`;
         try {
           const response = await fetch(sentMessagesApiEndpoint);
           const data = await response.json();
