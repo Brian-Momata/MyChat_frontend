@@ -2,6 +2,7 @@ import { useState, useContext } from 'react';
 import { IconContext } from './App';
 import './styling/Auth.css'
 import logo from './assets/logoipsum-250.svg'
+import Loading from './Loading'
 
 const Auth = () => {
   const { onAuthenticationSuccess, setCurrentUser } = useContext(IconContext);
@@ -10,6 +11,7 @@ const Auth = () => {
   const [username, setUsername] = useState('');
   const [passwordError, setPasswordError] = useState(false);
   const [type, setType] = useState('signin');
+  const [loading, setLoading] = useState(false);
 
   const apiUrl = `https://backend-api-dmnv.onrender.com/users/${type === 'signup' ? 'signup' : 'login'}`;
 
@@ -30,6 +32,8 @@ const Auth = () => {
       body: JSON.stringify(postData),
     };
 
+    setLoading(true); // Set loading to true when the request starts
+
     try {
       const response = await fetch(apiUrl, fetchOptions);
       if (response.ok) {
@@ -42,6 +46,8 @@ const Auth = () => {
       }
     } catch (e) {
       console.log(e);
+    } finally {
+      setLoading(false); // Set loading to false after the request completes
     }
   };
 
@@ -62,57 +68,63 @@ const Auth = () => {
 
   return (
     <div className='auth-wrapper'>
-      <div>
-        <img src={logo} className='app-logo' alt="logo" />
-      </div>
-      <div className={`auth-container ${type}`}>
-        <h2>{type === 'signup' ? 'Sign Up' : 'Sign In'}</h2>
-        <form onSubmit={handleSubmit}>
-          {type === 'signup' && (
-            <>
-              <label htmlFor='username'>Username:</label>
+      {loading ? (
+        <Loading />
+      ) : (
+        <>
+          <div>
+            <img src={logo} className='app-logo' alt="logo" />
+          </div>
+          <div className={`auth-container ${type}`}>
+            <h2>{type === 'signup' ? 'Sign Up' : 'Sign In'}</h2>
+            <form onSubmit={handleSubmit}>
+              {type === 'signup' && (
+                <>
+                  <label htmlFor='username'>Username:</label>
+                  <input
+                    type="text"
+                    name="username"
+                    id="username"
+                    value={username}
+                    onChange={(e) => setUsername(e.target.value)}
+                    required
+                  />
+                </>
+              )}
+              <label htmlFor='email'>Email:</label>
               <input
-                type="text"
-                name="username"
-                id="username"
-                value={username}
-                onChange={(e) => setUsername(e.target.value)}
+                type='email'
+                name='email'
+                id='email'
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
                 required
               />
-            </>
-          )}
-          <label htmlFor='email'>Email:</label>
-          <input
-            type='email'
-            name='email'
-            id='email'
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            required
-          />
-          <label htmlFor='password'>Password:</label>
-          <input
-            type='password'
-            name='password'
-            id='password'
-            value={password}
-            onChange={handlePasswordChange}
-            required
-          />
-          {passwordError && (
-            <p className="error-message">Password must be at least 6 characters long.</p>
-          )}
-          <button type="submit">{type === 'signup' ? 'Sign Up' : 'Sign In'}</button>
-        </form>
-        <p>
-          {type === 'signup'
-            ? 'Already have an account?'
-            : "Don't have an account yet?"}
-          <a href='#' onClick={handleLinkClick}>
-            {type === 'signup' ? 'Sign In' : 'Sign Up'}
-          </a>
-        </p>
-      </div>
+              <label htmlFor='password'>Password:</label>
+              <input
+                type='password'
+                name='password'
+                id='password'
+                value={password}
+                onChange={handlePasswordChange}
+                required
+              />
+              {passwordError && (
+                <p className="error-message">Password must be at least 6 characters long.</p>
+              )}
+              <button type="submit">{type === 'signup' ? 'Sign Up' : 'Sign In'}</button>
+            </form>
+            <p>
+              {type === 'signup'
+                ? 'Already have an account?'
+                : "Don't have an account yet?"}
+              <a href='#' onClick={handleLinkClick}>
+                {type === 'signup' ? 'Sign In' : 'Sign Up'}
+              </a>
+            </p>
+          </div>
+        </>
+      )}
     </div>
   );
 };
