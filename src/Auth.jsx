@@ -1,6 +1,7 @@
 import { useState, useContext } from 'react';
 import { IconContext } from './App';
 import './styling/Auth.css'
+import logo from './assets/logoipsum-250.svg'
 
 const Auth = () => {
   const { onAuthenticationSuccess, setCurrentUser } = useContext(IconContext);
@@ -8,7 +9,7 @@ const Auth = () => {
   const [password, setPassword] = useState('');
   const [username, setUsername] = useState('');
   const [passwordError, setPasswordError] = useState(false);
-  const [type, setType] = useState('signup');
+  const [type, setType] = useState('signin');
 
   const apiUrl = `https://backend-api-dmnv.onrender.com/users/${type === 'signup' ? 'signup' : 'login'}`;
 
@@ -61,9 +62,8 @@ const Auth = () => {
 
   return (
     <div className='auth-wrapper'>
-      <div className='app-logo'>
-        <ion-icon name="logo-wechat"></ion-icon>
-        <q>Usijali sina tagline</q>
+      <div>
+        <img src={logo} className='app-logo' alt="logo" />
       </div>
       <div className={`auth-container ${type}`}>
         <h2>{type === 'signup' ? 'Sign Up' : 'Sign In'}</h2>

@@ -72,7 +72,7 @@ nav ion-icon {
   position: absolute;
   bottom: 10px;
   left: 80px;
-  background-color: rgba(85, 85, 85, 0.9);
+  background-color: rgb(85, 85, 85);
   color: #fff;
   border-radius: 10px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);

@@ -4,6 +4,7 @@ import MessagingHub from "./MessagingHub"
 import ChatWindow from "./ChatWindow"
 import Auth from "./Auth"
 import './styling/App.css'
+import logo from './assets/logoipsum-250.svg'
 
 export const IconContext = createContext({
   activeIcon: '',
@@ -76,8 +77,7 @@ function App() {
       <>
         <div className="app">
           <div className="header">
-            <ion-icon name="logo-wechat"></ion-icon>
-            <h4>MyChat</h4>
+            <img src={logo} className="logo" alt="logo" />
           </div>
           <IconContext.Provider value={{
             activeIcon,
