@@ -1,8 +1,9 @@
-import React, { createContext, useState, useEffect } from "react"
+import { createContext, useState, useEffect } from "react"
 import NavSection from "./NavSection"
 import MessagingHub from "./MessagingHub"
 import ChatWindow from "./ChatWindow"
 import Auth from "./Auth"
+import SmallScreen from "./SmallScreen"
 import './styling/App.css'
 import logo from './assets/logoipsum-250.svg'
 
@@ -19,6 +20,8 @@ export const IconContext = createContext({
   users: [],
   sentMessages: [],
   defaultProfile: '',
+  setActiveComponent: () => { },
+  activeComponent: '',
 })
 function App() {
   const [activeIcon, setActiveIcon] = useState('chats');
@@ -28,9 +31,26 @@ function App() {
   const [currentUser, setCurrentUser] = useState(null)
   const [users, setUsers] = useState([]);
   const [sentMessages, setSentMessages] = useState([]);
+  const [isSmallScreen, setIsSmallScreen] = useState(false);
+  const [activeComponent, setActiveComponent] = useState("messagingHub");
 
   const defaultProfile = 'https://api.dicebear.com/8.x/icons/svg?seed=Sassy&backgroundColor[]'
   const usersApiEndpoint = 'https://backend-api-dmnv.onrender.com/users';
+
+  useEffect(() => {
+    const checkScreenSize = () => {
+      setIsSmallScreen(window.innerWidth < 768);
+    };
+
+    checkScreenSize();
+    window.addEventListener("resize", checkScreenSize);
+
+    // Cleanup function to remove event listener
+    return () => {
+      window.removeEventListener("resize", checkScreenSize);
+    };
+  }, []);
+
 
   useEffect(() => {
     const fetchUsers = async () => {
@@ -66,9 +86,11 @@ function App() {
   const handlePersonClick = (person) => {
     setClickedUser(person);
     setShowProfile(false);
+    if (isSmallScreen) {
+      setActiveComponent("chatWindow");
+    }
   }
   const onAuthenticationSuccess = () => {
-    console.log("Authentication successful!");
     setAuthenticated(true);
   };
 
@@ -92,10 +114,18 @@ function App() {
             users,
             sentMessages,
             defaultProfile,
+            setActiveComponent,
+            activeComponent,
           }}>
-            <NavSection />
-            <MessagingHub />
-            <ChatWindow />
+            {isSmallScreen ? (
+              <SmallScreen />
+            ) : (
+              <>
+                <NavSection />
+                <MessagingHub />
+                <ChatWindow />
+              </>
+            )}
           </IconContext.Provider>
         </div>
       </>

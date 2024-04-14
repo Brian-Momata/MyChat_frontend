@@ -3,7 +3,7 @@ import './styling/NavSection.css';
 import { useContext, useState } from 'react';
 
 const NavSection = () => {
-  const { activeIcon, setActiveIcon, showProfile, setShowProfile, currentUser, defaultProfile } = useContext(IconContext);
+  const { activeIcon, setActiveIcon, showProfile, setShowProfile, currentUser, defaultProfile, setActiveComponent } = useContext(IconContext);
   const [showAvatarOptions, setShowAvatarOptions] = useState(false);
 
   const avatars = [
@@ -22,6 +22,7 @@ const NavSection = () => {
       setActiveIcon(icon);
       setShowProfile(false);
     }
+    setActiveComponent("messagingHub");
   };
 
   const handleAvatarSelection = async (avatarSrc) => {
