@@ -1,5 +1,5 @@
 import './styling/MessagingHub.css';
-import { useContext, useEffect, useState } from 'react';
+import { useContext } from 'react';
 import { IconContext } from './App';
 
 const MessagingHub = () => {

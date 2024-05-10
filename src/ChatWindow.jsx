@@ -1,12 +1,15 @@
 import './styling/ChatWindow.css'
 import { IconContext } from './App';
 import { useContext, useState, useEffect, useRef } from 'react';
+import cableApp from './cable';
 
 const ChatWindow = () => {
 	const { clickedUser, currentUser, defaultProfile } = useContext(IconContext)
 	const [messageContent, setMessageContent] = useState('')
 	const [messages, setMessages] = useState([]);
 	const messageInputRef = useRef(null);
+
+	const cable = cableApp();
 
 	const fetchMessages = async () => {
 		try {
@@ -57,6 +60,22 @@ const ChatWindow = () => {
 			console.error('Error sending message:', error);
 		}
 	};
+
+	useEffect(() => {
+		if (currentUser) {
+			cable.subscriptions.create(
+				{
+					channel: 'ChatsChannel',
+					user_id: currentUser.id,
+					recipient_id: clickedUser.id
+				},
+				{
+					received: (message) => { setMessages([...messages, message]) }
+				}
+			);
+		}
+
+	}, [currentUser, cable.subscriptions, clickedUser, messages])
 
 	return (
 		<div className="chat-window">
