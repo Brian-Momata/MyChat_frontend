@@ -2,7 +2,7 @@ import ActionCable from "actioncable";
 
 const cableApp = () => {
   const cableObject = {}
-  cableObject.cable = ActionCable.createConsumer('ws://127.0.0.1:3001/cable')
+  cableObject.cable = ActionCable.createConsumer('ws://backend-api-dmnv.onrender.com/cable')
 
   return cableObject.cable
 }
