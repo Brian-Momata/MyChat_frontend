@@ -42,7 +42,6 @@ const MessagingHub = () => {
           {sentMessages.map((message, index) => {
             const receiver = users.find(user => user.id === message.receiver_id);
             const latestMsg = latestMessages.find(msg => msg.receiverId === receiver.id);
-            console.table(latestMessages)
             return (
               <div key={index} className='hub-chat' onClick={() => handlePersonClick(receiver)}>
                 <img className='hub-avatar' src={receiver.avatar || defaultProfile} alt="profile" />
