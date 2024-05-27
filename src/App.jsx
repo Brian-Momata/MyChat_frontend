@@ -5,7 +5,6 @@ import ChatWindow from "./ChatWindow"
 import Auth from "./Auth"
 import SmallScreen from "./SmallScreen"
 import './styling/App.css'
-import logo from './assets/logoipsum-250.svg'
 
 export const IconContext = createContext({
   activeIcon: '',
@@ -98,9 +97,6 @@ function App() {
     authenticated ? (
       <>
         <div className="app">
-          <div className="header">
-            <img src={logo} className="logo" alt="logo" />
-          </div>
           <IconContext.Provider value={{
             activeIcon,
             setActiveIcon,
