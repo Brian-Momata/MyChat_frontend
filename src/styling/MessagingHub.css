@@ -4,6 +4,7 @@
   background-color: #363636;
 
   padding: 20px;
+  overflow-y: auto;
 }
 
 .hub-chat, .hub-person {
@@ -48,4 +49,10 @@
 
 .last-message {
   color: #555;
+}
+
+@media only screen and (max-width: 767px) {
+  .messaging-hub {
+    height: calc(100vh - 60px);
+  }
 }

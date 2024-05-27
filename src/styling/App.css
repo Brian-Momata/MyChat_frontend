@@ -4,26 +4,15 @@
 
   display: grid;
   grid-template-columns: 80px 1fr 2fr;
-  grid-template-rows: 60px 1fr;
   grid-template-areas:
-    "header header header"
     "nav hub chatwindow";
   gap: 2px;
 }
 
-.header {
-  grid-area: header;
-  padding: 10px;
-  display: flex;
-  align-items: center;
-}
-
 @media only screen and (max-width: 767px) {
   .app {
-    grid-template-columns: 1fr;
-    grid-template-rows: 60px 1fr 80px;
+    grid-template-rows: 1fr 60px;
     grid-template-areas:
-      "header"
       "content"
       "nav";
   }
@@ -37,6 +26,7 @@
   }
 
   nav {
+    position: sticky;
     flex-direction: row;
     justify-content: center;
   }
