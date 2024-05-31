@@ -1,4 +1,5 @@
 import { useState, useContext } from 'react';
+import Cookies from 'js-cookie';
 import { IconContext } from './App';
 import './styling/Auth.css'
 import logo from './assets/logoipsum-250.svg'
@@ -37,10 +38,13 @@ const Auth = () => {
     try {
       const response = await fetch(apiUrl, fetchOptions);
       if (response.ok) {
-        onAuthenticationSuccess();
         const responseData = await response.json();
         const currentUser = responseData.data.user;
+        const token = response.headers.get('Authorization').split(' ')[1]; // Extract the JWT token from response headers
+
+        Cookies.set('token', token, { expires: 1}); // Store JWT token in cookies
         setCurrentUser(currentUser);
+        onAuthenticationSuccess();
       } else {
         alert(type === 'signup' ? 'Failed to sign up' : 'Failed to log in');
       }

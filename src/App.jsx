@@ -1,4 +1,5 @@
 import { createContext, useState, useEffect } from "react"
+import Cookies from "js-cookie"
 import NavSection from "./NavSection"
 import MessagingHub from "./MessagingHub"
 import ChatWindow from "./ChatWindow"
@@ -81,6 +82,28 @@ function App() {
 
     fetchSentMessages();
   }, [currentUser]);
+
+  useEffect(() => {
+    const checkAuthentication = async () => {
+      const token = Cookies.get('token');
+      if (token) {
+        const response = await fetch('https://backend-api-dmnv.onrender.com/validate_token', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`,
+          },
+        });
+        if (response.ok) {
+          setAuthenticated(true);
+        } else {
+          Cookies.remove('token');
+          setAuthenticated(false);
+        }
+      }
+    }
+    checkAuthentication();
+  }, [])
 
   const handlePersonClick = (person) => {
     setClickedUser(person);
