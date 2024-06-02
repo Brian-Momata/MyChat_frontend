@@ -50,9 +50,3 @@
 .last-message {
   color: #555;
 }
-
-@media only screen and (max-width: 767px) {
-  .messaging-hub {
-    height: calc(100vh - 80px);
-  }
-}
