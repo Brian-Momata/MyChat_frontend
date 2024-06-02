@@ -95,6 +95,10 @@ function App() {
           },
         });
         if (response.ok) {
+          const responseData = await response.json();
+          const user = responseData.user;
+
+          setCurrentUser(user);
           setAuthenticated(true);
         } else {
           Cookies.remove('token');
